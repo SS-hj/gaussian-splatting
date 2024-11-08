@@ -58,14 +58,14 @@ class ImageViewer(QWidget):
     def load_and_resize_image(self, image_file):
         # Load and resize images to the window size to reduce real-time scaling time
         pixmap = QPixmap(os.path.join(self.image_folder, image_file))
-        return pixmap.scaled(self.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        return pixmap.scaled(self.label.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
 
     def load_image(self):
         if self.timer.isActive():
             # During auto play, use pre-loaded images
             pixmap = self.preloaded_images[self.current_index]
         else:
-            # For prev/next buttons, load image based on the current window size
+            # For prev/next buttons, load image based on the current label size
             pixmap = self.load_and_resize_image(self.image_files[self.current_index])
 
         self.label.setPixmap(pixmap)
